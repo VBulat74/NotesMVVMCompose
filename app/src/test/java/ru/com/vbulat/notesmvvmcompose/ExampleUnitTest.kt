@@ -1,4 +1,4 @@
-package com.example.notesmvvmcompose
+package ru.com.vbulat.notesmvvmcompose
 
 import org.junit.Test
 

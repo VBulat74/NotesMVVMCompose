@@ -1,4 +1,4 @@
-package com.example.notesmvvmcompose.ui.theme
+package ru.com.vbulat.notesmvvmcompose.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

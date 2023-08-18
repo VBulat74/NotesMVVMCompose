@@ -1,4 +1,4 @@
-package com.example.notesmvvmcompose.ui.theme
+package ru.com.vbulat.notesmvvmcompose.ui.theme
 
 import android.app.Activity
 import android.os.Build
