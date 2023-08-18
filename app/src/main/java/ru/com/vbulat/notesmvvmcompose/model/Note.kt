@@ -1,7 +1,15 @@
 package ru.com.vbulat.notesmvvmcompose.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "notes_table")
 data class Note(
-    val id : Int,
+    @PrimaryKey(autoGenerate = true)
+    val id : Int = 0,
+    @ColumnInfo
     val title : String,
+    @ColumnInfo
     val subtitle : String,
 )
