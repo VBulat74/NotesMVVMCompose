@@ -5,8 +5,12 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import ru.com.vbulat.notesmvvmcompose.database.room.AppRoomDatabase
 import ru.com.vbulat.notesmvvmcompose.database.room.repository.RoomRepositoryImpl
+import ru.com.vbulat.notesmvvmcompose.model.Note
 import ru.com.vbulat.notesmvvmcompose.utils.REPOSITORY
 import ru.com.vbulat.notesmvvmcompose.utils.TYPE_ROOM
 
@@ -24,6 +28,18 @@ class MainViewModel (application: Application) : AndroidViewModel(application) {
             }
         }
     }
+
+    fun addNote (note: Note, onSuccess: () -> Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            REPOSITORY.create(note){
+                viewModelScope.launch(Dispatchers.Main) {
+                    onSuccess()
+                }
+            }
+        }
+    }
+
+    fun readAllNotes() = REPOSITORY.readAll
 }
 
 class MainViewModelFactory(private val application: Application) : ViewModelProvider.Factory{

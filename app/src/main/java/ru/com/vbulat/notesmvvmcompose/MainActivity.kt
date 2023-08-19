@@ -1,5 +1,6 @@
 package ru.com.vbulat.notesmvvmcompose
 
+import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,7 +15,9 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.com.vbulat.notesmvvmcompose.navigation.NotesNavHost
 import ru.com.vbulat.notesmvvmcompose.ui.theme.NotesMVVMComposeTheme
 
@@ -24,6 +27,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NotesMVVMComposeTheme {
+                val context = LocalContext.current
+                val mainViewModel : MainViewModel =
+                    viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
+
                 Scaffold(
                     topBar = {
                         TopAppBar(
@@ -42,7 +49,7 @@ class MainActivity : ComponentActivity() {
                                 .padding(padding)
                                 .fillMaxSize(),
                         ) {
-                            NotesNavHost()
+                            NotesNavHost(mainViewModel)
                         }
 
                     }

@@ -28,7 +28,7 @@ import ru.com.vbulat.notesmvvmcompose.utils.TYPE_ROOM
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StartScreen(navController: NavHostController) {
+fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
     val context = LocalContext.current
     val mainViewModel : MainViewModel =
         viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
@@ -77,6 +77,10 @@ fun StartScreen(navController: NavHostController) {
 @Composable
 fun PrevStartScreen(){
     NotesMVVMComposeTheme {
-        StartScreen(navController = rememberNavController())
+        val context = LocalContext.current
+        val mainViewModel : MainViewModel =
+            viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
+
+        StartScreen(navController = rememberNavController(), viewModel = mainViewModel)
     }
 }
