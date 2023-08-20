@@ -11,6 +11,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -23,11 +24,18 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import ru.com.vbulat.notesmvvmcompose.MainViewModel
 import ru.com.vbulat.notesmvvmcompose.MainViewModelFactory
+import ru.com.vbulat.notesmvvmcompose.model.Note
 import ru.com.vbulat.notesmvvmcompose.ui.theme.NotesMVVMComposeTheme
+import ru.com.vbulat.notesmvvmcompose.utils.Constants
+import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.NONE
+import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.SUBTITLE_TEXT
+import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.TITLE_TEXT
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NoteScreen(navController: NavHostController, viewModel: MainViewModel) {
+fun NoteScreen(navController: NavHostController, viewModel: MainViewModel, noteId: String?) {
+    val notes = viewModel.readAllNotes().observeAsState(listOf()).value
+    val note = notes.firstOrNull {it.id == noteId?.toInt()} ?: Note(title = NONE, subtitle = NONE)
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -50,13 +58,13 @@ fun NoteScreen(navController: NavHostController, viewModel: MainViewModel) {
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Text(
-                        text = "Title",
+                        text = note.title,
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(top = 16.dp)
                     )
                     Text(
-                        text = "Subtitle",
+                        text = note.subtitle,
                         fontSize = 18.sp,
                         modifier = Modifier.padding(top = 8.dp, bottom = 16.dp)
                     )
@@ -73,6 +81,10 @@ fun PrevNoteScreen(){
         val context = LocalContext.current
         val mainViewModel : MainViewModel =
             viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
-        NoteScreen(navController = rememberNavController(), viewModel = mainViewModel)
+        NoteScreen(
+            navController = rememberNavController(),
+            viewModel = mainViewModel,
+            noteId = "1",
+        )
     }
 }

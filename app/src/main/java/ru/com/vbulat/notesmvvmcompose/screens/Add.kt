@@ -30,6 +30,10 @@ import ru.com.vbulat.notesmvvmcompose.MainViewModelFactory
 import ru.com.vbulat.notesmvvmcompose.model.Note
 import ru.com.vbulat.notesmvvmcompose.navigation.NavRoute
 import ru.com.vbulat.notesmvvmcompose.ui.theme.NotesMVVMComposeTheme
+import ru.com.vbulat.notesmvvmcompose.utils.Constants
+import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.ADD_NEW_NOTE
+import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.NOTE_SUBTITLE
+import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.NOTE_TITLE
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,7 +51,7 @@ fun AddScreen (navController: NavHostController, viewModel: MainViewModel) {
             verticalArrangement = Arrangement.Center,
         ) {
             Text(
-                text = "Add new Note:",
+                text = ADD_NEW_NOTE,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(vertical = 8.dp)
@@ -59,7 +63,7 @@ fun AddScreen (navController: NavHostController, viewModel: MainViewModel) {
                     title = it
                     isButtonEnabled = title.isNotEmpty() && subtitle.isNotEmpty()
                 },
-                label = { Text(text = "Note title:")},
+                label = { Text(text = NOTE_TITLE)},
                 isError = title.isEmpty()
             )
 
@@ -69,7 +73,7 @@ fun AddScreen (navController: NavHostController, viewModel: MainViewModel) {
                     subtitle = it
                     isButtonEnabled = title.isNotEmpty() && subtitle.isNotEmpty()
                 },
-                label = { Text(text = "Note subtitle:")},
+                label = { Text(text = NOTE_SUBTITLE)},
                 isError = subtitle.isEmpty()
             )
 
@@ -82,7 +86,7 @@ fun AddScreen (navController: NavHostController, viewModel: MainViewModel) {
                     }
                 },
             ) {
-                Text(text = "Add new Note")
+                Text(text = ADD_NEW_NOTE)
             }
         }
     }

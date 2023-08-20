@@ -23,16 +23,16 @@ import ru.com.vbulat.notesmvvmcompose.MainViewModel
 import ru.com.vbulat.notesmvvmcompose.MainViewModelFactory
 import ru.com.vbulat.notesmvvmcompose.navigation.NavRoute
 import ru.com.vbulat.notesmvvmcompose.ui.theme.NotesMVVMComposeTheme
+import ru.com.vbulat.notesmvvmcompose.utils.Constants
+import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.FIREBASE_DB
+import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.ROOM_DB
+import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.WHAT_WILL_WE_USE
 import ru.com.vbulat.notesmvvmcompose.utils.TYPE_FIREBASE
 import ru.com.vbulat.notesmvvmcompose.utils.TYPE_ROOM
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
-    val context = LocalContext.current
-    val mainViewModel : MainViewModel =
-        viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
-
     Scaffold (
         modifier = Modifier.fillMaxSize()
     ) {paddingValues ->
@@ -43,10 +43,10 @@ fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {
-            Text(text = "What will we use?")
+            Text(text = WHAT_WILL_WE_USE)
             Button(
                 onClick = {
-                    mainViewModel.initDatabase(TYPE_ROOM){
+                    viewModel.initDatabase(TYPE_ROOM){
                         navController.navigate(route = NavRoute.Main.route)
                     }
                 },
@@ -54,12 +54,12 @@ fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
                     .width(200.dp)
                     .padding(vertical = 8.dp),
             ) {
-                Text(text = "ROOM database")
+                Text(text = ROOM_DB)
             }
 
             Button(
                 onClick = {
-                    mainViewModel.initDatabase(TYPE_FIREBASE) {
+                    viewModel.initDatabase(TYPE_FIREBASE) {
                         navController.navigate(route = NavRoute.Main.route)
                     }
                 },
@@ -67,7 +67,7 @@ fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
                     .width(200.dp)
                     .padding(vertical = 8.dp),
             ) {
-                Text(text = "Firebase database")
+                Text(text = FIREBASE_DB)
             }
         }
     }
