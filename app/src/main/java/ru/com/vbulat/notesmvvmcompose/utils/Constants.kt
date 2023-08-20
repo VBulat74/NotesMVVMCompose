@@ -22,6 +22,11 @@ object Constants {
         const val FIREBASE_DB = "Firebase database"
         const val ID = "id"
         const val NONE = "none"
+        const val UPDATE = "UPDATE"
+        const val DELETE = "DELETE"
+        const val NAV_BACK = "NAV_BACK"
+        const val EDIT_NOTES = "Edit note"
+        const val EMPTY = "EMPTY"
 
 
     }

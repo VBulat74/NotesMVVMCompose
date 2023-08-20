@@ -1,6 +1,7 @@
 package ru.com.vbulat.notesmvvmcompose.screens
 
 import android.app.Application
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,7 +24,6 @@ import ru.com.vbulat.notesmvvmcompose.MainViewModel
 import ru.com.vbulat.notesmvvmcompose.MainViewModelFactory
 import ru.com.vbulat.notesmvvmcompose.navigation.NavRoute
 import ru.com.vbulat.notesmvvmcompose.ui.theme.NotesMVVMComposeTheme
-import ru.com.vbulat.notesmvvmcompose.utils.Constants
 import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.FIREBASE_DB
 import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.ROOM_DB
 import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.WHAT_WILL_WE_USE
@@ -33,6 +33,7 @@ import ru.com.vbulat.notesmvvmcompose.utils.TYPE_ROOM
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
+    Log.d("AAA", "StartScreen")
     Scaffold (
         modifier = Modifier.fillMaxSize()
     ) {paddingValues ->

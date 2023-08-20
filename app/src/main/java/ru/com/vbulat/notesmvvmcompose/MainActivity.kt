@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
                                 .padding(padding)
                                 .fillMaxSize(),
                         ) {
-                            NotesNavHost(mainViewModel)
+                            NotesNavHost(mainViewModel = mainViewModel)
                         }
 
                     }

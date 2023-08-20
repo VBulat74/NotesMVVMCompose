@@ -30,13 +30,13 @@ fun NotesNavHost(mainViewModel: MainViewModel) {
         composable(NavRoute.Start.route) { StartScreen(navController = navController, viewModel = mainViewModel)}
         composable(NavRoute.Main.route) { MainScreen(navController = navController, viewModel = mainViewModel)}
         composable(NavRoute.Add.route) { AddScreen(navController = navController, viewModel = mainViewModel)}
-        composable(NavRoute.Note.route) { NoteScreen(navController = navController, viewModel = mainViewModel, noteId = "1")}
-//        composable(NavRoute.Note.route + "/(${Constants.Keys.ID})") {backstackEntry ->
-//            NoteScreen(
-//                navController = navController,
-//                viewModel = mainViewModel,
-//                noteId = backstackEntry.arguments?.getString(Constants.Keys.ID),
-//            )
-//        }
+//        composable(NavRoute.Note.route) { NoteScreen(navController = navController, viewModel = mainViewModel, noteId = "1")}
+        composable(NavRoute.Note.route + "/{${Constants.Keys.ID}}") {backstackEntry ->
+            NoteScreen(
+                navController = navController,
+                viewModel = mainViewModel,
+                noteId = backstackEntry.arguments?.getString(Constants.Keys.ID),
+            )
+        }
     }
 }
