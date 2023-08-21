@@ -11,10 +11,19 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -25,26 +34,16 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import kotlinx.coroutines.launch
 import ru.com.vbulat.notesmvvmcompose.MainViewModel
 import ru.com.vbulat.notesmvvmcompose.MainViewModelFactory
 import ru.com.vbulat.notesmvvmcompose.model.Note
-import ru.com.vbulat.notesmvvmcompose.navigation.NavRoute
 import ru.com.vbulat.notesmvvmcompose.ui.theme.NotesMVVMComposeTheme
+import ru.com.vbulat.notesmvvmcompose.utils.Constants
 import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.DELETE
 import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.NAV_BACK
 import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.NONE
 import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.UPDATE
-import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Surface
-import androidx.compose.material3.rememberModalBottomSheetState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
-import kotlinx.coroutines.launch
-import ru.com.vbulat.notesmvvmcompose.utils.Constants
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -99,7 +98,8 @@ fun NoteScreen(navController: NavHostController, viewModel: MainViewModel, noteI
                             onClick = {
                                 viewModel.updateNote(note = Note(id = note.id, title = title, subtitle = subtitle)){
                                     showBottomSheet = false
-                                    navController.navigate(NavRoute.Main.route)
+                                    //navController.navigate(NavRoute.Main.route)
+                                    navController.popBackStack()
                                 }
                             },
                         ) {
@@ -164,7 +164,8 @@ fun NoteScreen(navController: NavHostController, viewModel: MainViewModel, noteI
                 Button(
                     onClick = {
                         viewModel.deleteNote(note){
-                            navController.navigate(NavRoute.Main.route)
+                            //navController.navigate(NavRoute.Main.route)
+                            navController.popBackStack()
                         }
                     },
                 ) {
@@ -178,7 +179,8 @@ fun NoteScreen(navController: NavHostController, viewModel: MainViewModel, noteI
                     .padding(horizontal = 32.dp)
                     .fillMaxWidth(),
                 onClick = {
-                    navController.navigate(NavRoute.Main.route)
+                    //navController.navigate(NavRoute.Main.route)
+                    navController.popBackStack()
                 },
             ) {
                 Text(text = NAV_BACK)

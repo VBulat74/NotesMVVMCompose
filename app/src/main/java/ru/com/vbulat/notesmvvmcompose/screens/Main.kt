@@ -77,7 +77,9 @@ fun NoteItem(
             )
             .fillMaxWidth()
             .clickable {
-                navController.navigate(NavRoute.Note.route + "/${note.id}")
+                navController.navigate(NavRoute.Note.route + "/${note.id}"){
+                    popUpTo(NavRoute.Main.route) { inclusive = false }
+                }
             },
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
     ) {

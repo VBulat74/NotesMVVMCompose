@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "871128512126",
+    "project_id": "notes-compose-23c4f",
+    "storage_bucket": "notes-compose-23c4f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:871128512126:android:d1a60a16ab913f7eb74a2f",
+        "android_client_info": {
+          "package_name": "ru.com.vbulat.notesmvvmcompose"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "871128512126-gpl76m3ig1o4aj6jg07tujk8kqggmcvq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVvheMIMxidZSCVC33WCrY6mKj8JSq114"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "871128512126-gpl76m3ig1o4aj6jg07tujk8kqggmcvq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

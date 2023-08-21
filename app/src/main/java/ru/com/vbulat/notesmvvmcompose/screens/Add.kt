@@ -28,9 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import ru.com.vbulat.notesmvvmcompose.MainViewModel
 import ru.com.vbulat.notesmvvmcompose.MainViewModelFactory
 import ru.com.vbulat.notesmvvmcompose.model.Note
-import ru.com.vbulat.notesmvvmcompose.navigation.NavRoute
 import ru.com.vbulat.notesmvvmcompose.ui.theme.NotesMVVMComposeTheme
-import ru.com.vbulat.notesmvvmcompose.utils.Constants
 import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.ADD_NEW_NOTE
 import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.NOTE_SUBTITLE
 import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.NOTE_TITLE
@@ -82,7 +80,8 @@ fun AddScreen (navController: NavHostController, viewModel: MainViewModel) {
                 enabled = isButtonEnabled,
                 onClick = {
                     viewModel.addNote(note = Note(title = title, subtitle = subtitle)){
-                        navController.navigate(NavRoute.Main.route)
+                        //navController.navigate(NavRoute.Main.route)
+                        navController.popBackStack()
                     }
                 },
             ) {
