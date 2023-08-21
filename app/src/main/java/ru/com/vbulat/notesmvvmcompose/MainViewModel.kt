@@ -8,10 +8,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import ru.com.vbulat.notesmvvmcompose.database.firebase.repository.FirebaseRepositoryImpl
 import ru.com.vbulat.notesmvvmcompose.database.room.AppRoomDatabase
 import ru.com.vbulat.notesmvvmcompose.database.room.repository.RoomRepositoryImpl
 import ru.com.vbulat.notesmvvmcompose.model.Note
 import ru.com.vbulat.notesmvvmcompose.utils.REPOSITORY
+import ru.com.vbulat.notesmvvmcompose.utils.TYPE_FIREBASE
 import ru.com.vbulat.notesmvvmcompose.utils.TYPE_ROOM
 
 class MainViewModel (application: Application) : AndroidViewModel(application) {
@@ -25,6 +27,16 @@ class MainViewModel (application: Application) : AndroidViewModel(application) {
                 val dao = AppRoomDatabase.getInstance(context).getRoomDao()
                 REPOSITORY = RoomRepositoryImpl(dao)
                 onSuccess()
+            }
+            TYPE_FIREBASE -> {
+                REPOSITORY = FirebaseRepositoryImpl()
+                REPOSITORY.connectToDatabase(
+                    {onSuccess()},
+                    {error_message ->
+                        //error_message -> Toast.makeText(context, "Error: $error_message", Toast.LENGTH_SHORT).show()
+                        Log.d("AAA", "Error: $error_message")
+                    }
+                )
             }
         }
     }
