@@ -5,6 +5,7 @@ import ru.com.vbulat.notesmvvmcompose.database.DatabaseRepository
 const val TYPE_DATABASE = "type_database"
 const val TYPE_ROOM = "type_room"
 const val TYPE_FIREBASE = "type_firebase"
+const val FIREBASE_ID = "firebase_id"
 
 lateinit var REPOSITORY : DatabaseRepository
 lateinit var LOGIN : String
@@ -17,8 +18,8 @@ object Constants {
         const val ADD_NEW_NOTE = "Add new Note"
         const val NOTE_TITLE = "Note title:"
         const val NOTE_SUBTITLE = "Note subtitle:"
-        const val TITLE_TEXT = "Title"
-        const val SUBTITLE_TEXT = "Subtitle"
+        const val TITLE_TEXT = "title"
+        const val SUBTITLE_TEXT = "subtitle"
         const val WHAT_WILL_WE_USE = "What will we use?"
         const val ROOM_DB = "ROOM database"
         const val FIREBASE_DB = "Firebase database"

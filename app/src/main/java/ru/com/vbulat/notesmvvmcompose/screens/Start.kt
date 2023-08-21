@@ -1,7 +1,6 @@
 package ru.com.vbulat.notesmvvmcompose.screens
 
 import android.app.Application
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,7 +20,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -98,7 +96,8 @@ fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
                                 LOGIN = login
                                 PASSWORD = password
                                 viewModel.initDatabase(TYPE_FIREBASE){
-                                    Toast.makeText(context, "Auth success", Toast.LENGTH_SHORT).show()
+                                    showBottomSheet = false
+                                    navController.navigate(route = NavRoute.Main.route)
                                 }
                             },
                             enabled = login.isNotEmpty() && password.isNotEmpty()
