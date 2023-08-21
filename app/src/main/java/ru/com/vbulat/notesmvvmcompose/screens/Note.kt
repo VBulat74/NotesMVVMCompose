@@ -42,14 +42,20 @@ import ru.com.vbulat.notesmvvmcompose.ui.theme.NotesMVVMComposeTheme
 import ru.com.vbulat.notesmvvmcompose.utils.Constants
 import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.DELETE
 import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.NAV_BACK
-import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.NONE
 import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.UPDATE
+import ru.com.vbulat.notesmvvmcompose.utils.DB_TYPE
+import ru.com.vbulat.notesmvvmcompose.utils.TYPE_FIREBASE
+import ru.com.vbulat.notesmvvmcompose.utils.TYPE_ROOM
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NoteScreen(navController: NavHostController, viewModel: MainViewModel, noteId: String?) {
     val notes = viewModel.readAllNotes().observeAsState(listOf()).value
-    val note = notes.firstOrNull {it.id == noteId?.toInt()} ?: Note(title = NONE, subtitle = NONE)
+    val note = when (DB_TYPE) {
+        TYPE_ROOM -> {notes.firstOrNull {it.id == noteId?.toInt()} ?: Note()}
+        TYPE_FIREBASE -> {notes.firstOrNull {it.firebase_id == noteId} ?: Note()}
+        else -> {Note()}
+    }
     val bottomSheetState = rememberModalBottomSheetState()
     var showBottomSheet by remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
@@ -96,7 +102,7 @@ fun NoteScreen(navController: NavHostController, viewModel: MainViewModel, noteI
                             modifier = Modifier
                                 .padding(top = 16.dp),
                             onClick = {
-                                viewModel.updateNote(note = Note(id = note.id, title = title, subtitle = subtitle)){
+                                viewModel.updateNote(note = Note(id = note.id, title = title, subtitle = subtitle, firebase_id = note.firebase_id)){
                                     showBottomSheet = false
                                     //navController.navigate(NavRoute.Main.route)
                                     navController.popBackStack()

@@ -1,6 +1,7 @@
 package ru.com.vbulat.notesmvvmcompose.screens
 
 import android.app.Application
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,6 +34,9 @@ import ru.com.vbulat.notesmvvmcompose.MainViewModelFactory
 import ru.com.vbulat.notesmvvmcompose.model.Note
 import ru.com.vbulat.notesmvvmcompose.navigation.NavRoute
 import ru.com.vbulat.notesmvvmcompose.ui.theme.NotesMVVMComposeTheme
+import ru.com.vbulat.notesmvvmcompose.utils.DB_TYPE
+import ru.com.vbulat.notesmvvmcompose.utils.TYPE_FIREBASE
+import ru.com.vbulat.notesmvvmcompose.utils.TYPE_ROOM
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -69,6 +73,11 @@ fun NoteItem(
     note : Note,
     navController: NavHostController
 ){
+    val noteId = when (DB_TYPE) {
+        TYPE_FIREBASE -> {note.firebase_id}
+        TYPE_ROOM -> {note.id}
+        else -> {""}
+    }
     Card (
         modifier = Modifier
             .padding(
@@ -77,7 +86,8 @@ fun NoteItem(
             )
             .fillMaxWidth()
             .clickable {
-                navController.navigate(NavRoute.Note.route + "/${note.id}"){
+                Log.d("AAA", "id: $noteId")
+                navController.navigate(NavRoute.Note.route + "/${noteId}"){
                     popUpTo(NavRoute.Main.route) { inclusive = false }
                 }
             },

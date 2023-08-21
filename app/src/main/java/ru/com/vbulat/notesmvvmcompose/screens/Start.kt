@@ -39,6 +39,7 @@ import ru.com.vbulat.notesmvvmcompose.utils.Constants
 import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.FIREBASE_DB
 import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.ROOM_DB
 import ru.com.vbulat.notesmvvmcompose.utils.Constants.Keys.WHAT_WILL_WE_USE
+import ru.com.vbulat.notesmvvmcompose.utils.DB_TYPE
 import ru.com.vbulat.notesmvvmcompose.utils.LOGIN
 import ru.com.vbulat.notesmvvmcompose.utils.PASSWORD
 import ru.com.vbulat.notesmvvmcompose.utils.TYPE_FIREBASE
@@ -52,7 +53,6 @@ fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
     //val coroutineScope = rememberCoroutineScope()
     var login by remember { mutableStateOf(Constants.Keys.EMPTY_TEXT) }
     var password by remember { mutableStateOf(Constants.Keys.EMPTY_TEXT) }
-    val context = LocalContext.current
 
     Scaffold (
         modifier = Modifier.fillMaxSize()
@@ -96,6 +96,7 @@ fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
                                 LOGIN = login
                                 PASSWORD = password
                                 viewModel.initDatabase(TYPE_FIREBASE){
+                                    DB_TYPE = TYPE_FIREBASE
                                     showBottomSheet = false
                                     navController.navigate(route = NavRoute.Main.route)
                                 }
@@ -120,6 +121,7 @@ fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
             Button(
                 onClick = {
                     viewModel.initDatabase(TYPE_ROOM){
+                        DB_TYPE = TYPE_ROOM
                         navController.navigate(route = NavRoute.Main.route)
                     }
                 },

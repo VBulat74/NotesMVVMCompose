@@ -34,11 +34,23 @@ class FirebaseRepositoryImpl : DatabaseRepository {
     }
 
     override suspend fun delete(note: Note, onSuccess: () -> Unit) {
-        TODO("Not yet implemented")
+        database.child(note.firebase_id).removeValue()
+            .addOnSuccessListener { onSuccess() }
+            .addOnFailureListener { Log.d("AAA", "Error: ${it.message.toString()}") }
     }
 
     override suspend fun update(note: Note, onSuccess: () -> Unit) {
-        TODO("Not yet implemented")
+        val noteId = note.firebase_id
+        val mapNotes = hashMapOf<String, Any>()
+
+        mapNotes[FIREBASE_ID] = noteId
+        mapNotes[Constants.Keys.TITLE_TEXT] = note.title
+        mapNotes[Constants.Keys.SUBTITLE_TEXT] = note.subtitle
+
+        database.child(noteId)
+            .updateChildren(mapNotes)
+            .addOnSuccessListener { onSuccess() }
+            .addOnFailureListener { Log.d("AAA", "Error: ${it.message.toString()}") }
     }
 
     override fun signOut() {
