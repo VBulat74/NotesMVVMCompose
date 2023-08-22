@@ -12,6 +12,7 @@ import ru.com.vbulat.notesmvvmcompose.database.firebase.repository.FirebaseRepos
 import ru.com.vbulat.notesmvvmcompose.database.room.AppRoomDatabase
 import ru.com.vbulat.notesmvvmcompose.database.room.repository.RoomRepositoryImpl
 import ru.com.vbulat.notesmvvmcompose.model.Note
+import ru.com.vbulat.notesmvvmcompose.utils.DB_TYPE
 import ru.com.vbulat.notesmvvmcompose.utils.REPOSITORY
 import ru.com.vbulat.notesmvvmcompose.utils.TYPE_FIREBASE
 import ru.com.vbulat.notesmvvmcompose.utils.TYPE_ROOM
@@ -66,6 +67,18 @@ class MainViewModel (application: Application) : AndroidViewModel(application) {
             REPOSITORY.delete(note){
                 viewModelScope.launch(Dispatchers.Main) { onSuccess() }
             }
+        }
+    }
+
+    fun sign_out(onSuccess: () -> Unit){
+        when(DB_TYPE.value) {
+            TYPE_FIREBASE,
+            TYPE_ROOM -> {
+                REPOSITORY.signOut()
+                DB_TYPE.value = ""
+                onSuccess()
+            }
+            else -> {Log.d ("AAA", "sign_out ELSE: ${DB_TYPE.value}") }
         }
     }
 

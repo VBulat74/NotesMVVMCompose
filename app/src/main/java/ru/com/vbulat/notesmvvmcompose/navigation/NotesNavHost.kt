@@ -1,9 +1,9 @@
 package ru.com.vbulat.notesmvvmcompose.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import ru.com.vbulat.notesmvvmcompose.MainViewModel
 import ru.com.vbulat.notesmvvmcompose.screens.AddScreen
 import ru.com.vbulat.notesmvvmcompose.screens.MainScreen
@@ -23,8 +23,7 @@ sealed class NavRoute(val route: String) {
 
 }
 @Composable
-fun NotesNavHost(mainViewModel: MainViewModel) {
-    val navController = rememberNavController()
+fun NotesNavHost(mainViewModel: MainViewModel, navController: NavHostController) {
 
     NavHost(navController = navController, startDestination = NavRoute.Start.route){
         composable(NavRoute.Start.route) { StartScreen(navController = navController, viewModel = mainViewModel)}

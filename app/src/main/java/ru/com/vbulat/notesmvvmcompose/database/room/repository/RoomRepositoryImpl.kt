@@ -23,4 +23,8 @@ class RoomRepositoryImpl (private val noteRoomDao: NoteRoomDao) : DatabaseReposi
         noteRoomDao.updateNote(note = note)
         onSuccess()
     }
+
+    override fun signOut() {
+        super.signOut()
+    }
 }

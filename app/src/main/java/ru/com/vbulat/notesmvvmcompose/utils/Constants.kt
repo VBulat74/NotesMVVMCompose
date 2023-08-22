@@ -1,8 +1,8 @@
 package ru.com.vbulat.notesmvvmcompose.utils
 
+import androidx.compose.runtime.mutableStateOf
 import ru.com.vbulat.notesmvvmcompose.database.DatabaseRepository
 
-const val TYPE_DATABASE = "type_database"
 const val TYPE_ROOM = "type_room"
 const val TYPE_FIREBASE = "type_firebase"
 const val FIREBASE_ID = "firebase_id"
@@ -10,7 +10,7 @@ const val FIREBASE_ID = "firebase_id"
 lateinit var REPOSITORY : DatabaseRepository
 lateinit var LOGIN : String
 lateinit var PASSWORD : String
-lateinit var DB_TYPE : String
+var DB_TYPE  = mutableStateOf("")
 
 object Constants {
     object Keys{
@@ -25,7 +25,6 @@ object Constants {
         const val ROOM_DB = "ROOM database"
         const val FIREBASE_DB = "Firebase database"
         const val ID = "id"
-        const val NONE = "none"
         const val UPDATE = "UPDATE"
         const val DELETE = "DELETE"
         const val NAV_BACK = "NAV_BACK"

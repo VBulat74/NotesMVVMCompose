@@ -51,7 +51,7 @@ import ru.com.vbulat.notesmvvmcompose.utils.TYPE_ROOM
 @Composable
 fun NoteScreen(navController: NavHostController, viewModel: MainViewModel, noteId: String?) {
     val notes = viewModel.readAllNotes().observeAsState(listOf()).value
-    val note = when (DB_TYPE) {
+    val note = when (DB_TYPE.value) {
         TYPE_ROOM -> {notes.firstOrNull {it.id == noteId?.toInt()} ?: Note()}
         TYPE_FIREBASE -> {notes.firstOrNull {it.firebase_id == noteId} ?: Note()}
         else -> {Note()}
